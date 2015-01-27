@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path('../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
+lib = File.expand_path('../../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
+
+require 'yavm/command_line'
+
+begin
+  command_line = YAVM::CommandLine.new
+  command_line.invoke!
+rescue Docopt::Exit => e
+  puts e.message
+end
