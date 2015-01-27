@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.date         = '2014-01-27'
 
   s.require_path = 'lib'
-  s.executables  = ["version"]
-  s.files = Dir.glob("{bin,lib}/**/*") + %w(README)
+  s.executables  = ['version']
+  s.files = Dir.glob("{bin,lib}/**/*") + %w(README.md)
 
   s.add_dependency('docopt', [">= 0.5.0", "~> 0.5.0"])
   s.add_dependency('json', [">= 1.8.0", "~> 1.8.1"])
