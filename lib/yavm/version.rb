@@ -33,11 +33,15 @@ module YAVM
     end
 
     def to_hash
-      @_version.marshal_dump
+      dump = @_version.marshal_dump
+      dump[:special] ||= ''
+      dump[:meta]    ||= ''
+
+      return dump
     end
 
     def to_yaml
-      @_version.marshal_dump.to_yaml
+      to_hash.to_yaml
     end
 
     def tag
