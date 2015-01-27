@@ -20,6 +20,14 @@ module YAVM
       end
     end
 
+    def special
+      empty_is_nil(:special)
+    end
+
+    def meta
+      empty_is_nil(:meta)
+    end
+
     def to_s
       format('%M.%m.%p%s')
     end
@@ -58,6 +66,11 @@ module YAVM
 
     private
 
+    def empty_is_nil(key)
+      value = @_version.send(key) || ''
+      value.empty? ? nil : value
+    end
+
     def parse(string)
       match = string.match(/\A(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<special>[a-z0-9]+))?(?:\+(?<meta>[a-z0-9]+))?\z/i)
 
@@ -81,7 +94,7 @@ module YAVM
     # Allows calling "version.minor" and the like on the Version instance
     #
     def_delegators :@_version,
-      :major,  :minor,  :patch,  :special,  :meta,
+      :major,  :minor,  :patch,
       :major=, :minor=, :patch=, :special=, :meta=
 
   end
