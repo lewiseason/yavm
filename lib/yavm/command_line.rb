@@ -2,23 +2,27 @@ require 'docopt'
 require 'yavm/stores'
 
 module YAVM
+  #
+  # Command line interface for the `version` command.
+  #
   class CommandLine
-
     def initialize
-      @invocation = File.basename($0)
+      @invocation = File.basename($PROGRAM_NAME)
     end
 
     def invoke!
-      @args    = Docopt::docopt(doc)
-      command  = @args.select { |a, v| commands.include?(a) && v }.keys.first
-      command  = 'show' if command.nil?
+      @args     = Docopt.docopt(doc)
+      command   = @args.select { |a, v| commands.include?(a) && v }.keys.first
+      command ||= 'show'
 
       versions = YAVM::Stores.locate_versions
 
       if versions.empty? && !@args['init']
-        puts "There doesn't seem to be any versioning information on this project."
-        puts "Use native versioning tools (see docs for support), or run `#{@invocation} init`"
-        puts "to use the default versioning method."
+        puts <<-MESSAGE.gsub(/^ {10}/, '').strip
+          There doesn't seem to be any versioning information on this project.
+          Use native versioning tools (see docs for support), or run `#{@invocation} init`
+          to use the built-in versioning method.
+        MESSAGE
         exit(1)
       end
 
@@ -33,32 +37,18 @@ module YAVM
         puts "#{version}"
 
       when 'inc'
-        if @args['major']
-          version.major += 1
-          version.minor = version.patch = 0
-          version.special = version.meta = nil
-
-        elsif @args['minor']
-          version.minor += 1
-          version.patch = 0
-          version.special = version.meta = nil
-
-        elsif @args['patch']
-          version.patch += 1
-          version.special = version.meta = nil
-
-        end
+        version.increment :major if @args['major']
+        version.increment :minor if @args['minor']
+        version.increment :patch if @args['patch']
 
         versions.set_all!(version)
 
       when 'special'
         version.special = @args['<string>']
-
         versions.set_all!(version)
 
       when 'meta'
         version.meta = @args['<string>']
-
         versions.set_all!(version)
 
       when 'format'
@@ -69,28 +59,28 @@ module YAVM
 
       when 'help'
         Docopt::Exit.set_usage(nil)
-        raise Docopt::Exit, doc.strip
+        fail Docopt::Exit, doc.strip
       end
-
     end
 
     private
 
-    def choose_authoritative!(versions)
-      puts "Multiple version stores are in use, and aren't consistent."
-      puts "  Please select the authoritative version:\n\n"
-      puts "WARNING: File munging is dangerous. A manual resolution might be safer.\n\n"
+    def choose_authoritative!(versions) # rubocop:disable Metrics/AbcSize
+      puts "Multiple version stores are available, and aren't consistent."
+      puts "Please select the authoritative version:\n\n"
+      puts "WARNING: Munging can be dangerous - a manual resolution might be safer.\n\n"
 
       selection = ''
 
       while selection.is_a? String
         versions.each_with_index do |version, index|
-          puts "   %3s: %-15s [%s]" % [index+1, version, version.store.name]
+          puts format('   %3s: %-15s [%s]', index + 1, version, version.store.name)
         end
 
         print "\nSelection: "
         selection = STDIN.gets.chomp
 
+        # rubocop:disable Style/CaseEquality
         if selection.to_i.to_s == selection && (1..versions.size) === selection.to_i
           selection = selection.to_i
           break
@@ -103,7 +93,6 @@ module YAVM
 
       puts "Now on #{authoritative_version}"
       exit(0)
-
     end
 
     def doc
@@ -139,12 +128,11 @@ module YAVM
     end
 
     def version_commands
-      ['show', 'inc', 'special', 'meta', 'format', 'tag']
+      %w(show inc special meta format tag)
     end
 
     def support_commands
-      ['help']
+      %w(help)
     end
-
   end
 end

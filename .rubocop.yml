@@ -1,0 +1,6 @@
+Metrics/MethodLength:
+  Enabled: false
+
+# It's the 21st Century.
+Metrics/LineLength:
+  Enabled: false

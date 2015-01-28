@@ -10,13 +10,11 @@ module YAVM
     def initialize(store, vobject = nil)
       self.store = store
 
-      if vobject
-        case vobject
-        when String
-          parse(vobject)
-        when Hash
-          load(vobject)
-        end
+      case vobject
+      when String
+        parse(vobject)
+      when Hash
+        load(vobject)
       end
     end
 
@@ -37,7 +35,7 @@ module YAVM
       dump[:special] ||= ''
       dump[:meta]    ||= ''
 
-      return dump
+      dump
     end
 
     def to_yaml
@@ -51,6 +49,7 @@ module YAVM
     def format(string = '')
       string = string.dup
 
+      # ? http://stackoverflow.com/a/8132638
       string.gsub!('%M', major.to_s)
       string.gsub!('%m', minor.to_s)
       string.gsub!('%p', patch.to_s)
@@ -58,14 +57,36 @@ module YAVM
       string.gsub!('%t', meta ? "+#{meta}" : '')
       string.gsub!('%%', '%')
 
-      return string
+      string
     end
 
+    # rubocop:disable Style/RedundantSelf
     def ==(other)
       self.major == other.major &&
-      self.minor == other.minor &&
-      self.patch == other.patch &&
-      self.special == other.special
+        self.minor == other.minor &&
+        self.patch == other.patch &&
+        self.special == other.special
+    end
+
+    def increment(what)
+      case what
+      when :major
+        self.major += 1
+        self.minor  = 0
+        self.patch  = 0
+      when :minor
+        self.minor += 1
+        self.patch  = 0
+      when :patch
+        self.patch += 1
+      else
+        fail "Can't increment #{what}"
+      end
+
+      if [:major, :minor, :patch].include? what
+        self.special = nil
+        self.meta    = nil
+      end
     end
 
     private
@@ -78,7 +99,7 @@ module YAVM
     def parse(string)
       match = string.match(/\A(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<special>[a-z0-9]+))?(?:\+(?<meta>[a-z0-9]+))?\z/i)
 
-      @_version = Hash[ match.names.zip( match.captures ) ]
+      @_version = Hash[match.names.zip(match.captures)]
       @_version = OpenStruct.new(@_version)
       integerize!
     end
@@ -98,8 +119,7 @@ module YAVM
     # Allows calling "version.minor" and the like on the Version instance
     #
     def_delegators :@_version,
-      :major,  :minor,  :patch,
-      :major=, :minor=, :patch=, :special=, :meta=
-
+                   :major,  :minor,  :patch,
+                   :major=, :minor=, :patch=, :special=, :meta=
   end
 end
