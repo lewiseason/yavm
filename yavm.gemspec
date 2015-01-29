@@ -18,5 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency('docopt', ['>= 0.5.0', '~> 0.5.0'])
   s.add_dependency('json', ['>= 1.8.0', '~> 1.8.1'])
 
-  s.add_development_dependency('rubocop')
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'cucumber'
+  s.add_development_dependency 'aruba'
 end
