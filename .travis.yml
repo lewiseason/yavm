@@ -3,3 +3,5 @@ rvm:
   - 1.9.3
   - 2.1
   - latest
+script:
+  - bundle exec rake test
