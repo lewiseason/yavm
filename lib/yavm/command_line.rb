@@ -67,8 +67,7 @@ module YAVM
             the existing version file.
           MESSAGE
 
-          Docopt::Exit.set_usage(nil)
-          fail Docopt::Exit, message
+          fail message
         end
 
         store  = Stores::Semver.new
