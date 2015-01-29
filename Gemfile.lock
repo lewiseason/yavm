@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    YAVM (0.2.0)
+    YAVM (0.2.1)
       docopt (~> 0.5.0, >= 0.5.0)
       json (~> 1.8.1, >= 1.8.0)
 
@@ -56,7 +56,7 @@ PLATFORMS
 
 DEPENDENCIES
   YAVM!
-  aruba
-  cucumber
+  aruba (~> 0.6.2, >= 0.6.2)
+  cucumber (~> 1.3.18, >= 1.3.18)
   rake
-  rubocop
+  rubocop (~> 0.28.0, >= 0.28.0)
