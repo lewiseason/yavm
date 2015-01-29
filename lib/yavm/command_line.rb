@@ -43,13 +43,19 @@ module YAVM
 
         versions.set_all!(version)
 
+        puts "#{version}"
+
       when 'special'
         version.special = @args['<string>']
         versions.set_all!(version)
 
+        puts "#{version}"
+
       when 'meta'
         version.meta = @args['<string>']
         versions.set_all!(version)
+
+        puts "#{version}"
 
       when 'format'
         puts "#{version.format(@args['<string>'])}"

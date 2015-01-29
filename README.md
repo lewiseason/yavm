@@ -88,7 +88,7 @@ Now on 1.0.3
 - [x] help
 - [x] package.json support
 - [x] bower.json support
-- [ ] when changing version, show new one
+- [x] when changing version, show new one
 - [ ] programmatic interface
 - [ ] tests
 - [ ] handle invalid version info (see Version#parse)
