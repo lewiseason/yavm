@@ -1,5 +1,8 @@
 # YAVM: Yet Another Version Manager
 
+[![Gem Version](https://badge.fury.io/rb/YAVM.svg)](http://badge.fury.io/rb/YAVM)
+[![Build Status](https://travis-ci.org/lewiseason/yavm.svg?branch=master)](https://travis-ci.org/lewiseason/yavm)
+
 A tiny gem for managing project version numbers.
 
 Heavily inspired by the `semver` gem, this is a tiny utility for managing version numbers,
