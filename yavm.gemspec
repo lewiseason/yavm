@@ -22,10 +22,11 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  s.add_dependency('docopt', ['>= 0.5.0', '~> 0.5.0'])
-  s.add_dependency('json',   ['>= 1.8.0', '~> 1.8.1'])
+  s.add_dependency 'docopt', '~> 0.5'
+  s.add_dependency 'json',   '~> 1.8'
 
-  s.add_development_dependency('rubocop',  ['>= 0.28.0', '~> 0.28.0'])
-  s.add_development_dependency('cucumber', ['>= 1.3.18', '~> 1.3.18'])
-  s.add_development_dependency('aruba',    ['>= 0.6.2',  '~> 0.6.2'])
+  s.add_development_dependency 'rake',     '~> 10.4'
+  s.add_development_dependency 'rubocop',  '~> 0.28'
+  s.add_development_dependency 'cucumber', '~> 1.3'
+  s.add_development_dependency 'aruba',    '~> 0.6'
 end
