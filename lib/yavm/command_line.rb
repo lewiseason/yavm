@@ -15,7 +15,7 @@ module YAVM
       command   = @args.select { |a, v| commands.include?(a) && v }.keys.first
       command ||= 'show'
 
-      versions = YAVM::Stores.locate_versions
+      versions = Stores.locate_versions
 
       if versions.empty? && !@args['init']
         puts <<-MESSAGE.gsub(/^ {10}/, '').strip
@@ -56,6 +56,40 @@ module YAVM
         versions.set_all!(version)
 
         puts "#{version}"
+
+      when 'init'
+        # Check if a Semver store is already defined - we should never attempt
+        # to initialize a new one if an existing one is found.
+        if versions.map { |v| v.store.class }.include? YAVM::Stores::Semver
+          message = <<-MESSAGE.gsub(/^ {12}/, '').strip
+            A .semver file already exists at version #{version}
+            See `#{@invocation} help` for details on working with
+            the existing version file.
+          MESSAGE
+
+          Docopt::Exit.set_usage(nil)
+          fail Docopt::Exit, message
+        end
+
+        store  = Stores::Semver.new
+        store.create!
+
+        semver = Version.new(store)
+        store.set!(semver)
+
+        versions = Stores.locate_versions
+
+        if version
+          puts <<-MESSAGE.gsub(/^ {12}/, '').strip
+            A version is already defined (#{version}),
+            I'll copy that to the new .semver file.
+
+          MESSAGE
+
+          versions.set_all!(version)
+        end
+
+        puts "#{version || semver}"
 
       when 'format'
         puts "#{version.format(@args['<string>'])}"
@@ -107,6 +141,7 @@ module YAVM
 
       Usage:
         #{@invocation}
+        #{@invocation} init
         #{@invocation} inc (major|minor|patch)
         #{@invocation} special [<string>]
         #{@invocation} meta [<string>]
@@ -116,6 +151,7 @@ module YAVM
 
       Options:
         inc          Increment a specific version number
+        init         Create a .semver file for tracking versioning
         special      Set a special (eg: pre-release) suffix
         meta         Set a metadata version suffix
         format       Display version in specific format (%M, %m, %p, %s, %t)
@@ -134,7 +170,7 @@ module YAVM
     end
 
     def version_commands
-      %w(show inc special meta format tag)
+      %w(show inc special meta init format tag)
     end
 
     def support_commands

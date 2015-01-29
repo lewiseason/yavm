@@ -24,7 +24,7 @@ module YAVM
     end
 
     def_delegators :versions, :<<, :length, :size, :[],
-      :first, :each, :each_with_index, :empty?, :any?
+      :first, :each, :each_with_index, :empty?, :any?, :map
 
     private
 

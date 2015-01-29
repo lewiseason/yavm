@@ -15,6 +15,8 @@ module YAVM
         parse(vobject)
       when Hash
         load(vobject)
+      when nil
+        empty
       end
     end
 
@@ -94,6 +96,12 @@ module YAVM
     def empty_is_nil(key)
       value = @_version.send(key) || ''
       value.empty? ? nil : value
+    end
+
+    def empty
+      @_version = OpenStruct.new ({
+        major: 0, minor: 0, patch: 0, special: '', meta: ''
+      })
     end
 
     def parse(string)

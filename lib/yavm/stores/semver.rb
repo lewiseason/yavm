@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'yaml'
 require 'yavm/stores/base'
 
@@ -11,6 +12,10 @@ module YAVM
 
       def glob
         './.semver'
+      end
+
+      def create!
+        FileUtils.touch '.semver'
       end
 
       def data

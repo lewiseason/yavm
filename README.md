@@ -92,6 +92,6 @@ Now on 1.0.3
 - [ ] programmatic interface
 - [ ] tests
 - [ ] handle invalid version info (see Version#parse)
-- [ ] 'version init'
+- [x] 'version init'
 - [ ] quick mode (when finding versions - short circuit once one is found)
 - [ ] raise sensible exceptions
