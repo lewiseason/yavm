@@ -12,7 +12,8 @@ which includes support for multiple version format stores:
 
 With planned support for:
 
-* Python distutils package support
+* Python distutils package
+* Possibly gem `::Version`
 
 # Usage
 
