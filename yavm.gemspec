@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.executables  = ['version']
 
-  s.test_files   = Dir.glob('{features,}/**/*')
+  s.test_files   = Dir.glob('features/**/*')
 
   s.add_dependency('docopt', ['>= 0.5.0', '~> 0.5.0'])
   s.add_dependency('json', ['>= 1.8.0', '~> 1.8.1'])
