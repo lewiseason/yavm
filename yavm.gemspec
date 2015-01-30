@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email        = 'me@lewiseason.co.uk'
   s.date         = Date.today.to_s
 
-  s.files        = Dir.glob('{bin,lib}/**/*') + %w(README.md)
+  s.files        = Dir.glob('bin/*') + Dir.glob('lib/yavm/**/*') + %w(lib/yavm.rb README.md)
 
   s.require_path = 'lib'
   s.executables  = ['version']
@@ -25,8 +25,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'docopt', '~> 0.5'
   s.add_dependency 'json',   '~> 1.8'
 
-  s.add_development_dependency 'rake',     '~> 10.4'
-  s.add_development_dependency 'rubocop',  '~> 0.28'
-  s.add_development_dependency 'cucumber', '~> 1.3'
-  s.add_development_dependency 'aruba',    '~> 0.6'
+  s.add_development_dependency 'rake',      '~> 10.4'
+  s.add_development_dependency 'rubocop',   '~> 0.28'
+  s.add_development_dependency 'cucumber',  '~> 1.3'
+  s.add_development_dependency 'aruba',     '~> 0.6'
+  s.add_development_dependency 'simplecov', '~> 0.9'
 end

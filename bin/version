@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'simplecov_loader' if ENV['COVERAGE']
+
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
