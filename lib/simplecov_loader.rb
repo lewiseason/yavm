@@ -6,4 +6,5 @@ invoke_type = ARGV.first || '[show]'
 
 SimpleCov.root ('../' * 5)
 SimpleCov.command_name "#{invoke_name} #{invoke_type} (#{invoke_time})"
+SimpleCov.at_exit do; end
 SimpleCov.start
