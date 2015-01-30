@@ -29,7 +29,7 @@ module YAVM
     end
 
     def to_s
-      format('%M.%m.%p%s')
+      format('%M.%m.%p%-s')
     end
 
     def to_hash
@@ -49,7 +49,7 @@ module YAVM
     end
 
     def tag
-      format('v%M.%m.%p%s%t')
+      format('v%M.%m.%p%-s%-t')
     end
 
     def format(string = '')
@@ -59,8 +59,10 @@ module YAVM
       string.gsub!('%M', major.to_s)
       string.gsub!('%m', minor.to_s)
       string.gsub!('%p', patch.to_s)
-      string.gsub!('%s', special ? "-#{special}" : '')
-      string.gsub!('%t', meta ? "+#{meta}" : '')
+      string.gsub!('%s', special || '')
+      string.gsub!('%t', meta || '')
+      string.gsub!('%-s', special ? "-#{special}" : '')
+      string.gsub!('%-t', meta ? "+#{meta}" : '')
       string.gsub!('%%', '%')
 
       string

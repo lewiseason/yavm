@@ -153,8 +153,8 @@ module YAVM
         init         Create a .semver file for tracking versioning
         special      Set a special (eg: pre-release) suffix
         meta         Set a metadata version suffix
-        format       Display version in specific format (%M, %m, %p, %s, %t)
-        tag          Equivalent to format 'v%M.%m.%p%s'
+        format       Display version in specific format (%M, %m, %p, %s, %t, %-s, %-t)
+        tag          Equivalent to format 'v%M.%m.%-p%-s'
         help         Show this screen.
 
       DOCOPT

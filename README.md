@@ -54,6 +54,8 @@ Tag | Meaning
 %t  | Me**t**a
 %%  | Literal % Character
 
+Add a dash to `%s` and `%t` (`%-s`/`%-t`) to prefix with the appropriate character.
+
 ## Conflict Resolution
 
 If your project contains multiple supported version "stores", YAVM will keep them in sync.
@@ -90,7 +92,7 @@ Now on 1.0.3
 - [x] bower.json support
 - [x] when changing version, show new one
 - [x] programmatic interface
-- [ ] tests
+- [ ] tests. inprogress
 - [ ] handle invalid version info (see Version#parse)
 - [x] 'version init'
 - [ ] quick mode (when finding versions - short circuit once one is found)
