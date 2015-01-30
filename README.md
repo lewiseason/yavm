@@ -95,5 +95,5 @@ Now on 1.0.3
 - [ ] tests. inprogress
 - [ ] handle invalid version info (see Version#parse)
 - [x] 'version init'
-- [ ] quick mode (when finding versions - short circuit once one is found)
+- [x] quick mode (when finding versions - short circuit once one is found)
 - [ ] raise sensible exceptions
