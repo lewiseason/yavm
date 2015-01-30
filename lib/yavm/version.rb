@@ -44,6 +44,10 @@ module YAVM
       to_hash.to_yaml
     end
 
+    def to_json
+      to_hash.to_json
+    end
+
     def tag
       format('v%M.%m.%p%s%t')
     end

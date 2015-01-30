@@ -6,20 +6,18 @@ require 'yavm/stores'
 
 module YAVM
 
-  def find(quiet = true)
-    versions = YAVM::Stores.locate_versions
+  def version(quiet: true, quick: true)
+    versions = YAVM::Stores.locate_versions(quick)
 
     if versions.equal?
       return versions.first
     else
       return nil if quiet
 
-      raise RuntimeError, ''
-
+      raise RuntimeError, 'No version information available'
     end
-
   end
 
-  module_function :find
+  module_function :version
 
 end

@@ -89,7 +89,7 @@ Now on 1.0.3
 - [x] package.json support
 - [x] bower.json support
 - [x] when changing version, show new one
-- [ ] programmatic interface
+- [x] programmatic interface
 - [ ] tests
 - [ ] handle invalid version info (see Version#parse)
 - [x] 'version init'

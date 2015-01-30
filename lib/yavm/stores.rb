@@ -17,10 +17,16 @@ module YAVM
       ]
     end
 
-    def locate_versions
+    def locate_versions(quick = false)
       versions = stores.map do |store|
         store = store.new
-        next store.to_version if store.exists?
+        if store.exists?
+          if quick
+            return YAVM::Versions.new([store.to_version])
+          else
+            next store.to_version
+          end
+        end
       end
 
       YAVM::Versions.new(versions)
