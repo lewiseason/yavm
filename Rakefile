@@ -12,12 +12,16 @@ end
 #   2. It wouldn't include all the data from aruba
 #
 task :coverage_summary do |t|
-  munge = IO.read('coverage/index.html')
-  percent = munge.match(/covered_percent[^\d]*(?<coverage>[\d\.]{2,})%/)['coverage']
-  puts """
+  file = 'tmp/coverage/index.html'
 
-  Code coverage for all files is: #{percent}%
-  """
+  if File.exist?(file)
+    munge = IO.read(file)
+    percent = munge.match(/covered_percent[^\d]*(?<coverage>[\d\.]{2,})%/)['coverage']
+    puts """
+
+    Code coverage for all files is: #{percent}%
+    """
+  end
 
 end
 
