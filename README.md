@@ -62,6 +62,18 @@ If your project contains multiple supported version "stores", YAVM will keep the
 If they go out of sync outside of YAVM, you will be prompted to pick the canonical/authoritative
 version, and all other stores will be updated.
 
+## Useful Aliases
+
+The following (horrible) aliases can be put in a `.gitconfig` file.
+
+```
+semtag    = !git tag -a $(version tag) -m \"Version $(version)\"
+semcommit = !git add $(version files) && git commit -m \"Version `version`\" && git semtag
+```
+
+Issuing `git semcommit` will add all files in your project with version information,
+do a commit with the version number and create a tag with the version number.
+
 ``` text
 $ version
 Multiple version stores are in use, and aren't consistent.
@@ -97,3 +109,4 @@ Now on 1.0.3
 - [x] 'version init'
 - [x] quick mode (when finding versions - short circuit once one is found)
 - [ ] raise sensible exceptions
+- [x] output a list of files which contain version info (for the `semcommit` git alias)

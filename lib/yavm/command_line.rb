@@ -96,6 +96,9 @@ module YAVM
       when 'tag'
         puts "#{version.tag}"
 
+      when 'files'
+        puts versions.map { |v| v.store.filename || nil }.compact.join "\n"
+
       when 'help'
         Docopt::Exit.set_usage(nil)
         fail Docopt::Exit, doc.strip
@@ -146,6 +149,7 @@ module YAVM
         #{@invocation} meta [<string>]
         #{@invocation} format <string>
         #{@invocation} tag
+        #{@invocation} files
         #{@invocation} help
 
       Options:
@@ -155,6 +159,7 @@ module YAVM
         meta         Set a metadata version suffix
         format       Display version in specific format (%M, %m, %p, %s, %t, %-s, %-t)
         tag          Equivalent to format 'v%M.%m.%-p%-s'
+        files        List the files which store version information
         help         Show this screen.
 
       DOCOPT
@@ -173,7 +178,7 @@ module YAVM
     end
 
     def support_commands
-      %w(help)
+      %w(help files)
     end
   end
 end

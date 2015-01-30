@@ -2,7 +2,7 @@ require 'date'
 
 Gem::Specification.new do |s|
   s.name         = 'YAVM'
-  s.version      = '0.3.1'
+  s.version      = '0.4.0'
 
   s.summary      = 'Yet Another Version Manager'
   s.description  = 'A tiny gem for managing project version numbers'
