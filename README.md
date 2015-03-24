@@ -20,6 +20,8 @@ With planned support for:
 
 # Usage
 
+## Command Line
+
 *Exhaustive usage patterns can be found at `version help`*
 
 ``` shell
@@ -43,7 +45,22 @@ $ version tag            # => v1.0.0+20141113  (useful for version control)
 $ version format "%M.%m" # => 1.0
 ```
 
-## Available Format Tags
+## Ruby Interface
+
+Add to Gemfile or install by hand, and use like so:
+
+``` ruby
+require 'yavm'
+
+if YAVM.version
+  puts "The version is #{YAVM.version.tag}"
+  # ...
+end
+```
+
+## Advanced Usage
+
+### Available Format Tags
 
 Tag | Meaning
 ----|---------------------
@@ -111,3 +128,4 @@ do a commit with the version number and create a tag with the version number.
 - [x] quick mode (when finding versions - short circuit once one is found)
 - [ ] raise sensible exceptions
 - [x] output a list of files which contain version info (for the `semcommit` git alias)
+- [ ] javascript programmatic interface (current fix is to dump the output of the version command to a file somewhere)
