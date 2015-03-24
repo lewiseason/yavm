@@ -1,5 +1,3 @@
-require 'date'
-
 Gem::Specification.new do |s|
   s.name         = 'YAVM'
   s.version      = '0.4.0'
@@ -11,9 +9,8 @@ Gem::Specification.new do |s|
 
   s.authors      = ['Lewis Eason']
   s.email        = 'me@lewiseason.co.uk'
-  s.date         = Date.today.to_s
 
-  s.files        = Dir.glob('bin/*') + Dir.glob('lib/yavm/**/*') + %w(lib/yavm.rb README.md)
+  s.files        = Dir.glob('{bin,lib/yavm}/**/*') + %w(lib/yavm.rb README.md)
 
   s.require_path = 'lib'
   s.executables  = ['version']
@@ -23,7 +20,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
 
   s.add_dependency 'docopt', '~> 0.5'
-  s.add_dependency 'json',   '~> 1.8'
 
   s.add_development_dependency 'rake',      '~> 10.4'
   s.add_development_dependency 'rubocop',   '~> 0.28'
