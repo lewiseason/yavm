@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
 
   s.add_dependency 'docopt', '~> 0.5'
+  s.add_dependency 'json'
 
   s.add_development_dependency 'rake',      '~> 10.4'
   s.add_development_dependency 'rubocop',   '~> 0.28'
