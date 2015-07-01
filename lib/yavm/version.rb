@@ -5,6 +5,8 @@ module YAVM
   class Version
     extend ::Forwardable
 
+    VERSION_REGEX = /\A(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<special>[a-z0-9]+))?(?:\+(?<meta>[a-z0-9]+))?\z/i
+
     attr_accessor :store
 
     def initialize(store, vobject = nil)
@@ -20,24 +22,12 @@ module YAVM
       end
     end
 
-    def special
-      empty_is_nil(:special)
-    end
-
-    def meta
-      empty_is_nil(:meta)
-    end
-
     def to_s
       format('%M.%m.%p%-s')
     end
 
     def to_hash
-      dump = @_version.marshal_dump
-      dump[:special] ||= ''
-      dump[:meta]    ||= ''
-
-      dump
+      @_version.marshal_dump
     end
 
     def to_yaml
@@ -61,8 +51,8 @@ module YAVM
       string.gsub!('%p', patch.to_s)
       string.gsub!('%s', special || '')
       string.gsub!('%t', meta || '')
-      string.gsub!('%-s', special ? "-#{special}" : '')
-      string.gsub!('%-t', meta ? "+#{meta}" : '')
+      string.gsub!('%-s', special.empty? ? '' : "-#{special}")
+      string.gsub!('%-t', meta.empty?    ? '' : "+#{meta}")
       string.gsub!('%%', '%')
 
       string
@@ -80,28 +70,36 @@ module YAVM
       case what
       when :major
         self.major += 1
-        self.minor  = 0
-        self.patch  = 0
       when :minor
         self.minor += 1
-        self.patch  = 0
       when :patch
         self.patch += 1
       else
         fail "Can't increment #{what}"
       end
+    end
 
-      if [:major, :minor, :patch].include? what
-        self.special = nil
-        self.meta    = nil
-      end
+    def major=(value)
+      clears(:minor, :patch, :special, :meta)
+      @_version.major = value
+    end
+
+    def minor=(value)
+      clears(:patch, :special, :meta)
+      @_version.minor = value
+    end
+
+    def patch=(value)
+      @_version.patch = value
     end
 
     private
 
-    def empty_is_nil(key)
-      value = @_version.send(key) || ''
-      value.empty? ? nil : value
+    def clears(*properties)
+      properties.each do |p|
+        value = @_version.send(p).is_a?(Fixnum) ? 0 : ''
+        @_version.send("#{p}=", value)
+      end
     end
 
     def empty
@@ -111,7 +109,7 @@ module YAVM
     end
 
     def parse(string)
-      match = string.match(/\A(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<special>[a-z0-9]+))?(?:\+(?<meta>[a-z0-9]+))?\z/i)
+      match = string.match(VERSION_REGEX)
 
       @_version = Hash[match.names.zip(match.captures)]
       @_version = OpenStruct.new(@_version)
@@ -133,7 +131,8 @@ module YAVM
     # Allows calling "version.minor" and the like on the Version instance
     #
     def_delegators :@_version,
-                   :major,  :minor,  :patch,
-                   :major=, :minor=, :patch=, :special=, :meta=
+      :major, :minor, :patch,
+      :special,  :meta,
+      :special=, :meta=
   end
 end
