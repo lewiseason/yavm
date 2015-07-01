@@ -1,13 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'simplecov_loader' if ENV['COVERAGE']
-
 lib = File.expand_path('../lib/', __FILE__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
 lib = File.expand_path('../../lib/', __FILE__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
+require 'simplecov_loader' if ENV['COVERAGE']
 require 'yavm/command_line'
 
 begin
