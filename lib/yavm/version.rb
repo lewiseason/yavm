@@ -45,14 +45,17 @@ module YAVM
     def format(string = '')
       string = string.dup
 
+      _special = special || ''
+      _meta    = meta || ''
+
       # ? http://stackoverflow.com/a/8132638
       string.gsub!('%M', major.to_s)
       string.gsub!('%m', minor.to_s)
       string.gsub!('%p', patch.to_s)
-      string.gsub!('%s', special || '')
-      string.gsub!('%t', meta || '')
-      string.gsub!('%-s', special.empty? ? '' : "-#{special}")
-      string.gsub!('%-t', meta.empty?    ? '' : "+#{meta}")
+      string.gsub!('%s', _special)
+      string.gsub!('%t', _meta)
+      string.gsub!('%-s', _special.empty? ? '' : "-#{special}")
+      string.gsub!('%-t', _meta.empty?    ? '' : "+#{meta}")
       string.gsub!('%%', '%')
 
       string
@@ -114,17 +117,24 @@ module YAVM
       @_version = Hash[match.names.zip(match.captures)]
       @_version = OpenStruct.new(@_version)
       integerize!
+      stringify!
     end
 
     def load(hash)
       @_version = OpenStruct.new(hash)
       integerize!
+      stringify!
     end
 
     def integerize!
       @_version.major = @_version.major.to_i
       @_version.minor = @_version.minor.to_i
       @_version.patch = @_version.patch.to_i
+    end
+
+    def stringify!
+      @_version.special ||= ''
+      @_version.meta    ||= ''
     end
 
     #
