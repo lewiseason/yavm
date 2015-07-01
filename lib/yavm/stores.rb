@@ -7,13 +7,12 @@ require 'yavm/stores/gem_spec'
 
 module YAVM
   module Stores
-
     def stores
       [
         YAVM::Stores::Semver,
         YAVM::Stores::Package,
         YAVM::Stores::Bower,
-        YAVM::Stores::GemSpec,
+        YAVM::Stores::GemSpec
       ]
     end
 

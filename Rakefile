@@ -11,18 +11,17 @@ end
 #   1. it's not actually started here, or by cucumber; and
 #   2. It wouldn't include all the data from aruba
 #
-task :coverage_summary do |t|
+task :coverage_summary do |_t|
   file = 'tmp/coverage/index.html'
 
   if File.exist?(file)
     munge = IO.read(file)
     percent = munge.match(/covered_percent[^\d]*(?<coverage>[\d\.]{2,})%/)['coverage']
-    puts """
+    puts ''"
 
     Code coverage for all files is: #{percent}%
-    """
+    "''
   end
-
 end
 
 task test: [:cucumber, :coverage_summary]

@@ -24,11 +24,10 @@ module YAVM
     end
 
     def_delegators :versions, :<<, :length, :size, :[],
-      :first, :each, :each_with_index, :empty?, :any?, :map
+                   :first, :each, :each_with_index, :empty?, :any?, :map
 
     private
 
     attr_accessor :versions
-
   end
 end

@@ -3,11 +3,10 @@
 require 'simplecov_loader' if ENV['COVERAGE']
 
 lib = File.expand_path('../lib/', __FILE__)
-$:.unshift lib unless $:.include?(lib)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
 lib = File.expand_path('../../lib/', __FILE__)
-$:.unshift lib unless $:.include?(lib)
-
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
 require 'yavm/command_line'
 

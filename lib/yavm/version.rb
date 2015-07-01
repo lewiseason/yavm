@@ -55,7 +55,7 @@ module YAVM
       string.gsub!('%s', _special)
       string.gsub!('%t', _meta)
       string.gsub!('%-s', _special.empty? ? '' : "-#{special}")
-      string.gsub!('%-t', _meta.empty?    ? '' : "+#{meta}")
+      string.gsub!('%-t', _meta.empty? ? '' : "+#{meta}")
       string.gsub!('%%', '%')
 
       string
@@ -134,15 +134,15 @@ module YAVM
 
     def stringify!
       @_version.special ||= ''
-      @_version.meta    ||= ''
+      @_version.meta ||= ''
     end
 
     #
     # Allows calling "version.minor" and the like on the Version instance
     #
     def_delegators :@_version,
-      :major, :minor, :patch,
-      :special,  :meta,
-      :special=, :meta=
+                   :major, :minor, :patch,
+                   :special,  :meta,
+                   :special=, :meta=
   end
 end

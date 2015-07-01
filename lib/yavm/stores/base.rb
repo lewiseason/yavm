@@ -2,7 +2,6 @@ require 'json'
 
 module YAVM
   module Stores
-
     class Base
       def name
         self.class.name
@@ -21,11 +20,9 @@ module YAVM
       def filename
         Dir[glob].first if exists?
       end
-
     end
 
     class GenericJSON < YAVM::Stores::Base
-
       def data
         @data ||= JSON.parse(IO.read(filename))
       end
@@ -38,9 +35,6 @@ module YAVM
         @data = update_version_key(new_version.to_s)
         File.open(filename, 'w') { |f| f.write JSON.pretty_generate(data) }
       end
-
     end
-
-
   end
 end

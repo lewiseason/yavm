@@ -3,7 +3,6 @@ require 'yavm/stores/base'
 module YAVM
   module Stores
     class Package < YAVM::Stores::GenericJSON
-
       def name
         'npm package.json'
       end
@@ -18,9 +17,8 @@ module YAVM
 
       def update_version_key(what)
         data['version'] = what
-        return data
+        data
       end
-
     end
   end
 end

@@ -5,7 +5,6 @@ require 'yavm/stores/base'
 module YAVM
   module Stores
     class GemSpec < YAVM::Stores::Base
-
       def name
         "gemspec: #{filename}"
       end
@@ -33,7 +32,6 @@ module YAVM
 
         File.open(filename, 'w') { |f| f.write new_spec }
       end
-
     end
   end
 end
