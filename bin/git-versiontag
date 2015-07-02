@@ -3,15 +3,18 @@
 lib = File.expand_path('../lib/', __FILE__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
+lib = File.expand_path('../../lib/', __FILE__)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+
 require 'yavm'
 require 'shell'
 
-Shell.def_system_command :git, `which git`
+Shell.def_system_command :git, 'git'
 
 sh = Shell.new
 
 version = YAVM.version
-files = YAVM.versions.files.map { |v| "\"#{v}\"" }
+files = YAVM.versions.files
 
 sh.git('add', *files)
 sh.git('commit', '--allow-empty', '-m', "Version #{version}", '--only', *files)
