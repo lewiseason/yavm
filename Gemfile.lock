@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    YAVM (0.5.0)
+    YAVM (0.5.1)
       docopt (~> 0.5)
       json
 
