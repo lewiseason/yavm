@@ -97,7 +97,11 @@ module YAVM
         puts "#{version.tag}"
 
       when 'files'
-        puts versions.map { |v| v.store.filename || nil }.compact.join "\n"
+        sep = "\n"
+        sep = ' '  if @args['-1']
+        sep = "\0" if @args['-0']
+
+        puts versions.map { |v| v.store.filename || nil }.compact.join(sep)
 
       when 'help'
         Docopt::Exit.set_usage(nil)
@@ -149,7 +153,7 @@ module YAVM
         #{@invocation} meta [<string>]
         #{@invocation} format <string>
         #{@invocation} tag
-        #{@invocation} files
+        #{@invocation} files [(-1|-0)]
         #{@invocation} help
 
       Options:
