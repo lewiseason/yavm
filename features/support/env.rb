@@ -1,7 +1,7 @@
 require 'aruba/cucumber'
 
 Before do |_scenario|
-  @dirs = ['tmp/aruba']
+  @dirs = ['.']
   @cwd  = Dir.pwd
 
   set_env('COVERAGE', 'true')

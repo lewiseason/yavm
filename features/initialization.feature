@@ -3,7 +3,7 @@ Feature: Command Line Initialization
   enforce consistency.
 
   Background:
-    Given I have a project called "project"
+    Given I have a project called "versioning"
 
   Scenario: Project with no version number
     Given I run `version`
