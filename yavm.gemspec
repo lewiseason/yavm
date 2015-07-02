@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.files        = Dir.glob('{bin,lib/yavm}/**/*') + %w(lib/yavm.rb README.md)
 
   s.require_path = 'lib'
-  s.executables  = ['version']
+  s.executables  = ['version', 'git-versiontag']
 
   s.test_files   = Dir.glob('features/**/*')
 

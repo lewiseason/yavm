@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path('../lib/', __FILE__)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+
+require 'yavm'
+require 'shell'
+
+Shell.def_system_command :git, `which git`
+
+sh = Shell.new
+
+version = YAVM.version
+files = YAVM.versions.files.map { |v| "\"#{v}\"" }
+
+sh.git('add', *files)
+sh.git('commit', '--allow-empty', '-m', "Version #{version}", '--only', *files)
+sh.git('tag', '-a', version.tag, '-m' "Version #{version}")
+

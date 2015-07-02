@@ -17,5 +17,9 @@ module YAVM
     end
   end
 
-  module_function :version
+  def versions
+    YAVM::Stores.locate_versions
+  end
+
+  module_function :version, :versions
 end

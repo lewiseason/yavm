@@ -23,6 +23,10 @@ module YAVM
       versions.reject { |v| v == versions.first }.length.zero?
     end
 
+    def files
+      versions.map { |v| v.store.filename || nil }.compact
+    end
+
     def_delegators :versions, :<<, :length, :size, :[],
                    :first, :each, :each_with_index, :empty?, :any?, :map
 
