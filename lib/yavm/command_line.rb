@@ -98,10 +98,13 @@ module YAVM
 
       when 'files'
         sep = "\n"
+        pad = ''
+
         sep = ' '  if @args['-1']
+        pad = '"'  if @args['-1']
         sep = "\0" if @args['-0']
 
-        puts versions.map { |v| v.store.filename || nil }.compact.join(sep)
+        puts versions.files.map { |v| "#{pad}#{v}#{pad}" }.join(sep)
 
       when 'help'
         Docopt::Exit.set_usage(nil)
