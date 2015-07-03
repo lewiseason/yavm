@@ -3,7 +3,7 @@ Feature: Command Line Interface
   version number, and set the 'special' and 'meta' fields
 
   Background:
-    Given I have a project called "versioning"
+    Given I have a project called "cli"
     And I run `version init`
 
     Then the output should contain "0.0.0"
