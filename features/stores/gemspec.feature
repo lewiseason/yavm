@@ -4,7 +4,7 @@ Feature: GemSpec Store
 
   Background:
     Given I have a project called "gemspec"
-    Ad I have a gemspec at version "1.3.2" called "test.gemspec"
+    And I have a gemspec at version "1.3.2" called "test.gemspec"
 
   Scenario: The file should exist in files subcommand
     Given I run `version files`
