@@ -26,6 +26,7 @@ module YAVM
       # This might be a bit brittle.
       #
       def set!(new_version)
+        # TODO: Can probably write a smarter regex here
         current_spec = IO.read(filename)
         spec_token   = current_spec.match(/Gem::Specification.new do \|(?<token>[^\|]+)\|/m)['token']
         new_spec     = current_spec.gsub(/^(\s+#{spec_token}\.version\s+=\s+)("|')([^"']+)(\2)/, "\\1\\2#{new_version}\\4")
