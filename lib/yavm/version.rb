@@ -43,22 +43,16 @@ module YAVM
     end
 
     def format(string = '')
-      string = string.dup
-
-      _special = special || ''
-      _meta    = meta || ''
-
-      # ? http://stackoverflow.com/a/8132638
-      string.gsub!('%M', major.to_s)
-      string.gsub!('%m', minor.to_s)
-      string.gsub!('%p', patch.to_s)
-      string.gsub!('%s', _special)
-      string.gsub!('%t', _meta)
-      string.gsub!('%-s', _special.empty? ? '' : "-#{special}")
-      string.gsub!('%-t', _meta.empty? ? '' : "+#{meta}")
-      string.gsub!('%%', '%')
-
-      string
+      string.gsub(/(%-?[Mmpst%])/, {
+        '%M' => major.to_s,
+        '%m' => minor.to_s,
+        '%p' => patch.to_s,
+        '%s' => special.to_s,
+        '%t' => meta.to_s,
+        '%-s' => special.to_s.empty? ? '' : "-#{special}",
+        '%-t' => meta.to_s.empty? ? '' : "+#{meta}",
+        '%%' => '%'
+      })
     end
 
     # rubocop:disable Style/RedundantSelf
