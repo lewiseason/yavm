@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name         = 'YAVM'
-  s.version      = '0.5.3'
+  s.version      = '0.6.0'
 
   s.summary      = 'Yet Another Version Manager'
   s.description  = 'A tiny gem for managing project version numbers'
