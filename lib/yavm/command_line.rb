@@ -93,6 +93,9 @@ module YAVM
       when 'format'
         puts "#{version.format(@args['<string>'])}"
 
+      when 'json'
+        puts "#{version.to_json}"
+
       when 'tag'
         puts "#{version.tag}"
 
@@ -155,6 +158,7 @@ module YAVM
         #{@invocation} special [<string>]
         #{@invocation} meta [<string>]
         #{@invocation} format <string>
+        #{@invocation} json
         #{@invocation} tag
         #{@invocation} files [(-1|-0)]
         #{@invocation} help
@@ -165,6 +169,7 @@ module YAVM
         special      Set a special (eg: pre-release) suffix
         meta         Set a metadata version suffix
         format       Display version in specific format (%M, %m, %p, %s, %t, %-s, %-t)
+        json         Display version in machine-readable JSON
         tag          Equivalent to format 'v%M.%m.%-p%-s'
         files        List the files which store version information
         help         Show this screen.
@@ -181,7 +186,7 @@ module YAVM
     end
 
     def version_commands
-      %w(show inc special meta init format tag)
+      %w(show inc special meta init format json tag)
     end
 
     def support_commands

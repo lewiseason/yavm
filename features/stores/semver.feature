@@ -24,4 +24,5 @@ Feature: Native .semver store
     Given I run `version inc minor`
     And I run `cat ./.semver`
 
-    Then the output should contain ':minor: 4'
+    Then the output should contain "minor: 4"
+    And the output should be valid YAML

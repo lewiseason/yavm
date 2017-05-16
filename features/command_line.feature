@@ -74,3 +74,17 @@ Feature: Command Line Interface
 
     And I run `version tag`
     Then the output should contain "0.0.1"
+
+  Scenario: JSON output - numbers
+    Given I run `version inc major`
+
+    And I run `version json`
+    Then the output should be valid JSON
+    And the json should contain major=1
+
+  Scenario: JSON output - meta
+    Given I run `version meta 20150129135914`
+
+    And I run `version json`
+    Then the output should be valid JSON
+    And the json should contain meta="20150129135914"
