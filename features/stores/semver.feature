@@ -6,15 +6,22 @@ Feature: Native .semver store
 
   Background:
     Given I have a project called "semver-file"
-    And I have a semver file at version "1.3.2"
+    And I have a semver file containing:
+      """
+      ---
+      :major: 0
+      :minor: 3
+      :patch: 3
+      :special: ''
+      :meta: ''
+      """
 
-  Scenario: File should exist in files subcommand
+  Scenario: The file should exist in files subcommand
     Given I run `version files`
-    Then the output should contain './.semver'
+    Then the output should contain "./.semver"
 
   Scenario: Updating the version should be reflected in the file
-    Given I increment the minor version in the semver store
-    And I set all version stores
+    Given I run `version inc minor`
     And I run `cat ./.semver`
 
     Then the output should contain ':minor: 4'
