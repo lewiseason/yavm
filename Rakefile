@@ -24,4 +24,4 @@ task :coverage_summary do |_t|
   end
 end
 
-task test: [:cucumber, :coverage_summary]
+task test: %i[cucumber coverage_summary]

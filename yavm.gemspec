@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors      = ['Lewis Eason']
   s.email        = 'me@lewiseason.co.uk'
 
-  s.files        = Dir.glob('{bin,lib/yavm}/**/*') + %w(lib/yavm.rb README.md)
+  s.files        = Dir.glob('{bin,lib/yavm}/**/*') + %w[lib/yavm.rb README.md]
 
   s.require_path = 'lib'
   s.executables  = ['version', 'git-versiontag']
@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'docopt', '~> 0.5'
   s.add_dependency 'json'
 
-  s.add_development_dependency 'rake',      '~> 10.4'
-  s.add_development_dependency 'cucumber',  '~> 1.3'
   s.add_development_dependency 'aruba',     '~> 0.6'
+  s.add_development_dependency 'cucumber',  '~> 1.3'
+  s.add_development_dependency 'rake',      '~> 10.4'
   s.add_development_dependency 'simplecov', '~> 0.9'
 
   s.add_development_dependency 'rubocop',   '~> 0.51.0'

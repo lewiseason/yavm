@@ -19,4 +19,3 @@ files = YAVM.versions.files
 sh.git('add', *files)
 sh.git('commit', '--allow-empty', '-m', "Version #{version}", '--only', *files)
 sh.git('tag', '-a', version.tag, '-m' "Version #{version}")
-

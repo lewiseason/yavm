@@ -13,7 +13,7 @@ module YAVM
     else
       return nil if quiet
 
-      fail 'No version information available'
+      raise 'No version information available'
     end
   end
 

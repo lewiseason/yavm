@@ -5,7 +5,7 @@ require 'yavm/stores/base'
 module YAVM
   module Stores
     class GemSpec < YAVM::Stores::Base
-      REGEX = %r{(Gem::Specification\.new do \|([^\|]+)\|.*)(\2.version\s+=\s+("|'))(\S+)\4(.*)}m
+      REGEX = /(Gem::Specification\.new do \|([^\|]+)\|.*)(\2.version\s+=\s+("|'))(\S+)\4(.*)/m
 
       def name
         "gemspec: #{filename}"

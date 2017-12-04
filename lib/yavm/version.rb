@@ -43,16 +43,14 @@ module YAVM
     end
 
     def format(string = '')
-      string.gsub(/(%-?[Mmpst%])/, {
-        '%M' => major.to_s,
-        '%m' => minor.to_s,
-        '%p' => patch.to_s,
-        '%s' => special.to_s,
-        '%t' => meta.to_s,
-        '%-s' => special.to_s.empty? ? '' : "-#{special}",
-        '%-t' => meta.to_s.empty? ? '' : "+#{meta}",
-        '%%' => '%'
-      })
+      string.gsub(/(%-?[Mmpst%])/, '%M' => major.to_s,
+                                   '%m' => minor.to_s,
+                                   '%p' => patch.to_s,
+                                   '%s' => special.to_s,
+                                   '%t' => meta.to_s,
+                                   '%-s' => special.to_s.empty? ? '' : "-#{special}",
+                                   '%-t' => meta.to_s.empty? ? '' : "+#{meta}",
+                                   '%%' => '%')
     end
 
     # rubocop:disable Style/RedundantSelf
@@ -72,7 +70,7 @@ module YAVM
       when :patch
         self.patch += 1
       else
-        fail "Can't increment #{what}"
+        raise "Can't increment #{what}"
       end
     end
 
@@ -94,7 +92,7 @@ module YAVM
 
     def clears(*properties)
       properties.each do |p|
-        value = @_version.send(p).is_a?(Fixnum) ? 0 : ''
+        value = @_version.send(p).is_a?(Integer) ? 0 : ''
         @_version.send("#{p}=", value)
       end
     end

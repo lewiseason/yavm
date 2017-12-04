@@ -1,13 +1,13 @@
 Then(/^the output should be valid YAML$/) do
-  expect {
+  expect do
     YAML.load(last_command_started.output)
-  }.not_to raise_error
+  end.not_to raise_error
 end
 
 Then(/^the output should be valid JSON$/) do
-  expect {
+  expect do
     JSON.load(last_command_started.output)
-  }.not_to raise_error
+  end.not_to raise_error
 end
 
 Then(/^the json should contain (major|minor|patch)=(.*?)$/) do |key, value|

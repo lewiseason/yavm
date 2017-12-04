@@ -6,6 +6,7 @@ module YAVM
       def name
         self.class.name
       end
+
       #
       # If the file for the store exists.
       # Only 1 file must match the glob.

@@ -34,7 +34,7 @@ module YAVM
 
       case command
       when 'show'
-        puts "#{version}"
+        puts version.to_s
 
       when 'inc'
         version.increment :major if @args['major']
@@ -43,19 +43,19 @@ module YAVM
 
         versions.set_all!(version)
 
-        puts "#{version}"
+        puts version.to_s
 
       when 'special'
         version.special = @args['<string>']
         versions.set_all!(version)
 
-        puts "#{version}"
+        puts version.to_s
 
       when 'meta'
         version.meta = @args['<string>']
         versions.set_all!(version)
 
-        puts "#{version}"
+        puts version.to_s
 
       when 'init'
         # Check if a Semver store is already defined - we should never attempt
@@ -67,10 +67,10 @@ module YAVM
             the existing version file.
           MESSAGE
 
-          fail message
+          raise message
         end
 
-        store  = Stores::Semver.new
+        store = Stores::Semver.new
         store.create!
 
         semver = Version.new(store)
@@ -88,16 +88,16 @@ module YAVM
           versions.set_all!(version)
         end
 
-        puts "#{version || semver}"
+        puts (version || semver).to_s
 
       when 'format'
-        puts "#{version.format(@args['<string>'])}"
+        puts version.format(@args['<string>']).to_s
 
       when 'json'
-        puts "#{version.to_json}"
+        puts version.to_json.to_s
 
       when 'tag'
-        puts "#{version.tag}"
+        puts version.tag.to_s
 
       when 'files'
         sep = "\n"
@@ -111,7 +111,7 @@ module YAVM
 
       when 'help'
         Docopt::Exit.set_usage(nil)
-        fail Docopt::Exit, doc.strip
+        raise Docopt::Exit, doc.strip
       end
     end
 
@@ -186,11 +186,11 @@ module YAVM
     end
 
     def version_commands
-      %w(show inc special meta init format json tag)
+      %w[show inc special meta init format json tag]
     end
 
     def support_commands
-      %w(help files)
+      %w[help files]
     end
   end
 end
