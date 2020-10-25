@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'aruba',     '~> 0.6'
   s.add_development_dependency 'cucumber',  '~> 1.3'
-  s.add_development_dependency 'rake',      '~> 10.4'
+  s.add_development_dependency 'rake',      '~> 12.3'
   s.add_development_dependency 'simplecov', '~> 0.9'
 
   s.add_development_dependency 'rubocop',   '~> 0.51.0'
